@@ -6,8 +6,6 @@ All rights reserved © 2016 Twitch Interactive, Inc.
 ## HTwitch made easy
 
 ```java
-package org.dinhware.testing;
-
 import org.dinhware.HTwitchBot;
 import org.dinhware.adapter.command.Command;
 import org.dinhware.adapter.core.MessageAdapter;
@@ -22,8 +20,8 @@ public class Test {
         /*
          * Initialize a new HTwitchBot instance
          *
-         * @param String
-         * @param String
+         * @param String name of the bot
+         * @param String oauth of the bot, with or without 'oauth:' in-front
          */
         HTwitchBot bot = new HTwitchBot("bot-nickname", "bot-oauth");
 
@@ -31,13 +29,15 @@ public class Test {
          * Request all Capabilities
          * simplified to request all Capabilities bot.requestCapabilities(Capability.values());
          *
-         * @param Capability[]
+         * @param Capability[] types of Capabilities to request
          */
         bot.requestCapabilities(Capability.COMMANDS, Capability.MEMBERSHIP, Capability.TAGS);
 
-        /*
+         /*
          * Toggle verbose mode on
          * Print anything read by the reader
+         * 
+         * @param boolean
          */
         bot.setVerbose(true);
 
@@ -45,6 +45,8 @@ public class Test {
          * Toggle error-verbose mode on
          * Print any error thrown by the internal-api-code
          * This includes any Listener or Command you add
+         * 
+         * @param boolean
          */
         bot.setPrintError(true);
 
