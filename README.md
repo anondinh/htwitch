@@ -1,8 +1,6 @@
 # HTwitch
-All rights reserved © 2016 Twitch Interactive, Inc.
 
-***
-
+This is an independent project not run by Twitch!
 Feel free to join the HTwitch [Discord](https://discord.gg/CNk6aKp) if you have any questions or suggestions
 
 ***
