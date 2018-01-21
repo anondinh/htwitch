@@ -3,3 +3,4 @@ HTwitch.iml
 out/
 src/org/dinhware/testing/*
 src/org/dinhware/production/*
+src/META-INF
