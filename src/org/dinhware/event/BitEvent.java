@@ -13,11 +13,13 @@ import java.util.Map;
 
 public class BitEvent extends Event {
     private String name, loginName;
+    private int amount;
 
     public BitEvent(Map<String, String> tags, String[] arguments, String line) {
         super(tags, arguments, line);
         this.name = tags.get("display-name");
         this.loginName = arguments[1].substring(1).split("!")[0];
+        this.amount = Integer.parseInt(tags.get("bits"));
     }
 
     public String getName() {
@@ -26,5 +28,9 @@ public class BitEvent extends Event {
 
     public String getLoginName() {
         return loginName;
+    }
+
+    public int getAmount() {
+        return amount;
     }
 }
