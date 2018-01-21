@@ -18,7 +18,7 @@ public class SubscriptionEvent extends Event {
 
     private int months;
 
-    private enum SubscriptionType {
+    public enum SubscriptionType {
         UNKNOWN, PRIME, FIRST, SECOND, THIRD
     }
 
