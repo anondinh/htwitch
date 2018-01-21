@@ -12,13 +12,12 @@ public class User {
     private String name;
     private Channel channel;
 
-    public User(Channel channel, String user) {
-        this.channel = channel;
-        this.name = user;
-    }
+    private long id;
 
-    public String getName() {
-        return name;
+    public User(Channel channel, String name, long id) {
+        this.channel = channel;
+        this.name = name;
+        this.id = id;
     }
 
     public Channel getChannel() {
@@ -37,6 +36,14 @@ public class User {
         channel.getBot().send(channel, ".timeout " + name + " " + duration);
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public long getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return name;
@@ -48,6 +55,6 @@ public class User {
             return false;
         }
         User user = (User) o;
-        return this.name.equals(user.name) && this.channel == user.channel;
+        return this.name.equals(user.name) && this.id == user.id && this.channel == user.channel;
     }
 }

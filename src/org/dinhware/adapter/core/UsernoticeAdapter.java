@@ -23,10 +23,13 @@ public abstract class UsernoticeAdapter implements Listener {
     public void dispatch(Map<String, String> tags, String[] arguments, String line) {
         switch (tags.get("msg-id")) {
             case "sub":
-                onSubscription(new SubscriptionEvent(tags, arguments, line));
+                onSubscription(new SubscriptionEvent(tags, arguments, line, false));
                 break;
             case "resub":
-                onReSubscription(new SubscriptionEvent(tags, arguments, line));
+                onReSubscription(new SubscriptionEvent(tags, arguments, line, false));
+                break;
+            case "subgift":
+                onGiftSubscription(new SubscriptionEvent(tags, arguments, line, true));
                 break;
             case "raid":
                 onRaid(new RaidEvent(tags, arguments, line));
@@ -40,6 +43,8 @@ public abstract class UsernoticeAdapter implements Listener {
     protected abstract void onSubscription(SubscriptionEvent event);
 
     protected abstract void onReSubscription(SubscriptionEvent event);
+
+    protected abstract void onGiftSubscription(SubscriptionEvent event);
 
     protected abstract void onRaid(RaidEvent event);
 

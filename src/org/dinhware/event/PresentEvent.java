@@ -20,7 +20,7 @@ public class PresentEvent extends Event {
     public PresentEvent(Map<String, String> tags, String[] arguments, String line) {
         super(tags, arguments, line);
         this.isPresent = arguments[1].equals("JOIN");
-        this.user = new User(getChannel(), line.substring(1).split("!")[0]);
+        this.user = new User(getChannel(), line.substring(1).split("!")[0], -1L);
     }
 
     public boolean isPresent() {

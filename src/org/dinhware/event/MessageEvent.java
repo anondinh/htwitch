@@ -22,7 +22,7 @@ public class MessageEvent extends Event {
         super(tags, arguments, line);
         this.displayed = displayed;
         this.message = message;
-        this.user = new User(getChannel(), tags.get("display-name"));
+        this.user = new User(getChannel(), tags.get("display-name"), Long.parseLong(tags.get("user-id")));
     }
 
     public String getDisplayed() {

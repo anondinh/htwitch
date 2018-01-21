@@ -1,6 +1,7 @@
 package org.dinhware.event;
 
 import org.dinhware.adapter.Event;
+import org.dinhware.objects.User;
 
 import java.util.Map;
 
@@ -13,21 +14,26 @@ import java.util.Map;
 
 public class SubscriptionEvent extends Event {
 
-    private String display, login, message;
+    private String message;
+    private User user, recipientUser;
     private SubscriptionType subscriptionType;
 
     private int months;
+    private boolean gift;
 
     public enum SubscriptionType {
         UNKNOWN, PRIME, FIRST, SECOND, THIRD
     }
 
-    public SubscriptionEvent(Map<String, String> tags, String[] arguments, String line) {
+    public SubscriptionEvent(Map<String, String> tags, String[] arguments, String line, boolean gift) {
         super(tags, arguments, line);
-        this.display = tags.get("display-name");
-        this.login = tags.get("login");
-        this.message = arguments[4].substring(1);
+        this.user = new User(getChannel(), tags.get("display-name") == null ? tags.get("login") : tags.get("display-name"), Long.parseLong(tags.get("user-id")));
+        String display = tags.get("msg-param-recipient-display-name"), name = tags.get("msg-param-recipient-user-name"), id = tags.get("msg-param-recipient-id");
+        this.recipientUser = new User(getChannel(), display == null ? name : display, id == null ? -1 : Long.parseLong(id));
         this.months = Integer.parseInt(tags.get("msg-param-months"));
+        this.message = arguments[4].substring(1);
+        this.gift = gift;
+
         switch (tags.get("msg-param-sub-plan")) {
             case "Prime":
                 subscriptionType = SubscriptionType.PRIME;
@@ -47,16 +53,16 @@ public class SubscriptionEvent extends Event {
         }
     }
 
-    public String getDisplay() {
-        return display;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
     public String getMessage() {
         return message;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public User getRecipientUser() {
+        return recipientUser;
     }
 
     public SubscriptionType getSubscriptionType() {
@@ -65,5 +71,9 @@ public class SubscriptionEvent extends Event {
 
     public int getMonths() {
         return months;
+    }
+
+    public boolean isGift() {
+        return gift;
     }
 }

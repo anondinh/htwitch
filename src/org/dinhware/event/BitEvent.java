@@ -12,7 +12,19 @@ import java.util.Map;
  */
 
 public class BitEvent extends Event {
+    private String name, loginName;
+
     public BitEvent(Map<String, String> tags, String[] arguments, String line) {
         super(tags, arguments, line);
+        this.name = tags.get("display-name");
+        this.loginName = arguments[1].substring(1).split("!")[0];
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLoginName() {
+        return loginName;
     }
 }
