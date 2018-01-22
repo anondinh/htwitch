@@ -18,6 +18,8 @@ public abstract class Event {
     private Channel channel;
     private String line;
 
+    private long timestamp = System.currentTimeMillis();
+
     public Event(Map<String, String> tags, String[] arguments, String line) {
         this.arguments = arguments;
         this.setChannel(arguments[line.startsWith("@") ? 3 : 2]);
@@ -47,5 +49,10 @@ public abstract class Event {
 
     public String getLine() {
         return line;
+    }
+
+    @Override
+    public String toString() {
+        return timestamp + "[" + line + "]";
     }
 }

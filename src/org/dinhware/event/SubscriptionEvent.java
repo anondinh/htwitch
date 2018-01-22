@@ -28,10 +28,14 @@ public class SubscriptionEvent extends Event {
     public SubscriptionEvent(Map<String, String> tags, String[] arguments, String line, boolean gift) {
         super(tags, arguments, line);
         this.user = new User(getChannel(), tags.get("display-name") == null ? tags.get("login") : tags.get("display-name"), Long.parseLong(tags.get("user-id")));
+
         String display = tags.get("msg-param-recipient-display-name"), name = tags.get("msg-param-recipient-user-name"), id = tags.get("msg-param-recipient-id");
         this.recipientUser = new User(getChannel(), display == null ? name : display, id == null ? -1 : Long.parseLong(id));
         this.months = Integer.parseInt(tags.get("msg-param-months"));
-        this.message = arguments[4].substring(1);
+        if (arguments.length == 5) {
+            this.message = arguments[4].substring(1);
+        }
+
         this.gift = gift;
 
         switch (tags.get("msg-param-sub-plan")) {

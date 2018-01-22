@@ -65,13 +65,13 @@ public class Channel {
         return Optional.ofNullable(users.get(user));
     }
 
-    public List<User> getUserlist() {
+    public List<User> getUserList() {
         return new ArrayList<>(users.values());
     }
 
     @Override
     public String toString() {
-        return channel;
+        return channel + getUserList().toString();
     }
 
     @Override

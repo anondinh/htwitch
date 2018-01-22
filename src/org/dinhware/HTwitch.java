@@ -39,6 +39,8 @@ abstract class HTwitch extends Thread {
 
     public abstract void send(Channel channel, Object o);
 
+    public abstract void sendWhisper(String user, Object o);
+
     public abstract void setVerbose(boolean verbose);
 
     public abstract void setPrintError(boolean printError);

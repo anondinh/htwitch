@@ -92,6 +92,11 @@ public class HTwitchBot extends HTwitch implements ListenerObservable {
     }
 
     @Override
+    public void sendWhisper(String user, Object message) {
+        sendRAW("PRIVMSG #jtv :/w " + user + " " + message);
+    }
+
+    @Override
     public void run() {
         while (!isInterrupted()) {
             try {
