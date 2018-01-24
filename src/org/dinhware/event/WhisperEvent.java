@@ -5,6 +5,7 @@ import org.dinhware.objects.Channel;
 import org.dinhware.objects.User;
 
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Created by: Niklas
@@ -39,7 +40,7 @@ public class WhisperEvent extends Event {
 
     @Override
     public final void respond(String response) {
-        Channel channel = Channel.getChannel("#" + getArguments()[3]);
+        Channel channel = Optional.ofNullable(Channel.getChannel("#" + getArguments()[3])).orElseThrow(() -> new RuntimeException("Whispers not enabled"));
         channel.getBot().sendWhisper(user.getName(), response);
     }
 }
