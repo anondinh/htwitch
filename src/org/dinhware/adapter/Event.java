@@ -31,7 +31,7 @@ public abstract class Event {
         channel = Channel.getChannel(name);
     }
 
-    public final void respond(String response) {
+    public void respond(String response) {
         channel.getBot().send(channel, response);
     }
 
@@ -55,4 +55,5 @@ public abstract class Event {
     public String toString() {
         return timestamp + "[" + line + "]";
     }
+
 }

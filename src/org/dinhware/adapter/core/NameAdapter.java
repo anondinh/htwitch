@@ -1,9 +1,8 @@
 package org.dinhware.adapter.core;
 
-import org.dinhware.adapter.Event;
 import org.dinhware.adapter.Listener;
 import org.dinhware.adapter.ListenerType;
-import org.dinhware.event.UnknownEvent;
+import org.dinhware.event.NameEvent;
 import org.dinhware.objects.EventType;
 
 import java.util.Map;
@@ -20,8 +19,8 @@ public abstract class NameAdapter implements Listener {
 
     @Override
     public void dispatch(Map<String, String> tags, String[] arguments, String line) {
-        onNames(new UnknownEvent(tags, arguments, line));
+        onNames(new NameEvent(tags, arguments, line));
     }
 
-    protected abstract void onNames(Event event);
+    protected abstract void onNames(NameEvent event);
 }

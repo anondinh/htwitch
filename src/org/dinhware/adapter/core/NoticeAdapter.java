@@ -1,9 +1,8 @@
 package org.dinhware.adapter.core;
 
-import org.dinhware.adapter.Event;
 import org.dinhware.adapter.Listener;
 import org.dinhware.adapter.ListenerType;
-import org.dinhware.event.UnknownEvent;
+import org.dinhware.event.NoticeEvent;
 import org.dinhware.objects.EventType;
 
 import java.util.Map;
@@ -20,8 +19,8 @@ public abstract class NoticeAdapter implements Listener {
 
     @Override
     public void dispatch(Map<String, String> tags, String[] arguments, String line) {
-        onNotice(new UnknownEvent(tags, arguments, line));
+        onNotice(new NoticeEvent(tags, arguments, line));
     }
 
-    protected abstract void onNotice(Event event);
+    protected abstract void onNotice(NoticeEvent event);
 }

@@ -35,6 +35,8 @@ abstract class HTwitch extends Thread {
 
     abstract void setReader(BufferedReader reader);
 
+    public abstract void enableWhisper();
+
     public abstract void sendRAW(Object o);
 
     public abstract void send(Channel channel, Object o);
@@ -68,5 +70,9 @@ abstract class HTwitch extends Thread {
 
         sendRAW(builder.toString());
         start();
+    }
+
+    String getNick() {
+        return nick;
     }
 }

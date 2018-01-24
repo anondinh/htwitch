@@ -2,8 +2,8 @@ package org.dinhware.adapter.core;
 
 import org.dinhware.adapter.Listener;
 import org.dinhware.adapter.ListenerType;
-import org.dinhware.adapter.command.Command;
-import org.dinhware.adapter.command.CommandObservable;
+import org.dinhware.adapter.command.ChatCommand;
+import org.dinhware.adapter.command.ChatObservable;
 import org.dinhware.event.BitEvent;
 import org.dinhware.event.MessageEvent;
 import org.dinhware.objects.EventType;
@@ -19,7 +19,7 @@ import java.util.Map;
  */
 
 @ListenerType(type = EventType.PRIVMSG)
-public abstract class MessageAdapter implements Listener, CommandObservable {
+public abstract class MessageAdapter implements Listener, ChatObservable {
 
     private final String COMMAND_PREFIX;
 
@@ -27,7 +27,7 @@ public abstract class MessageAdapter implements Listener, CommandObservable {
         this.COMMAND_PREFIX = COMMAND_PREFIX;
     }
 
-    private Map<String, Command> listeners = new HashMap<>();
+    private Map<String, ChatCommand> listeners = new HashMap<>();
 
     @Override
     public void dispatch(Map<String, String> tags, String[] arguments, String line) {
@@ -46,7 +46,7 @@ public abstract class MessageAdapter implements Listener, CommandObservable {
     }
 
     @Override
-    public void addCommand(String trigger, Command command) {
+    public void addCommand(String trigger, ChatCommand command) {
         listeners.put(trigger, command);
     }
 

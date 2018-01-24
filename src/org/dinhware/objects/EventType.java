@@ -10,9 +10,9 @@ import java.util.Arrays;
  */
 
 public enum EventType {
-    INVALID, JOIN, PART, PRIVMSG, MODE, NAMES, CLEARCHAT, GLOBALUSERSTATE, ROOMSTATE, USERNOTICE, USERSTATE, HOSTTARGET, NOTICE;
+    INVALID, JOIN, PART, PRIVMSG, MODE, NAMES, CLEARCHAT, GLOBALUSERSTATE, ROOMSTATE, USERNOTICE, USERSTATE, HOSTTARGET, NOTICE, WHISPER;
 
     public static EventType get(String type) {
-        return Arrays.stream(EventType.values()).filter(o -> o.name().equals(type)).findAny().orElse(EventType.INVALID);
+        return Arrays.stream(EventType.values()).filter(o -> o.name().equals(type)).findAny().orElseGet(() -> type.equals("353") ? NAMES : INVALID);
     }
 }

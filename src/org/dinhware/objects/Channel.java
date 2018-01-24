@@ -71,7 +71,7 @@ public class Channel {
 
     @Override
     public String toString() {
-        return channel + getUserList().toString();
+        return channel;
     }
 
     @Override

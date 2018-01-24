@@ -9,6 +9,8 @@ import org.dinhware.event.MessageEvent;
  * Time: 14:29
  */
 
-public interface Command {
-    void execute(MessageEvent event);
+public interface ChatObservable {
+    void addCommand(String trigger, ChatCommand command);
+
+    void notifyCommand(String command, MessageEvent event);
 }

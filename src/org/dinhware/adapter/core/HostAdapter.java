@@ -1,9 +1,8 @@
 package org.dinhware.adapter.core;
 
-import org.dinhware.adapter.Event;
 import org.dinhware.adapter.Listener;
 import org.dinhware.adapter.ListenerType;
-import org.dinhware.event.UnknownEvent;
+import org.dinhware.event.HostEvent;
 import org.dinhware.objects.EventType;
 
 import java.util.Map;
@@ -20,15 +19,8 @@ public abstract class HostAdapter implements Listener {
 
     @Override
     public void dispatch(Map<String, String> tags, String[] arguments, String line) {
-        UnknownEvent event = new UnknownEvent(tags, arguments, line);
-        if (arguments.length == 4) {
-            onHostStart(event);
-        } else {
-            onHostEnd(event);
-        }
+        onHost(new HostEvent(tags, arguments, line));
     }
 
-    protected abstract void onHostStart(Event event);
-
-    protected abstract void onHostEnd(Event event);
+    protected abstract void onHost(HostEvent event);
 }

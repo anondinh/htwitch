@@ -1,9 +1,8 @@
 package org.dinhware.adapter.core;
 
-import org.dinhware.adapter.Event;
 import org.dinhware.adapter.Listener;
 import org.dinhware.adapter.ListenerType;
-import org.dinhware.event.UnknownEvent;
+import org.dinhware.event.GlobalUserstateEvent;
 import org.dinhware.objects.EventType;
 
 import java.util.Map;
@@ -20,8 +19,8 @@ public abstract class GlobalUserstateAdapter implements Listener {
 
     @Override
     public void dispatch(Map<String, String> tags, String[] arguments, String line) {
-        onGlobalUserstate(new UnknownEvent(tags, arguments, line));
+        onGlobalUserstate(new GlobalUserstateEvent(tags, arguments, line));
     }
 
-    protected abstract void onGlobalUserstate(Event event);
+    protected abstract void onGlobalUserstate(GlobalUserstateEvent event);
 }

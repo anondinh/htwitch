@@ -67,6 +67,11 @@ public class HTwitchBot extends HTwitch implements ListenerObservable {
     }
 
     @Override
+    public void enableWhisper() {
+        sendRAW("JOIN #" + getNick());
+    }
+
+    @Override
     public void sendRAW(Object o) {
         try {
             writer.write(o + "\r\n");
