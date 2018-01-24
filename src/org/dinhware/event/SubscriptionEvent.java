@@ -22,7 +22,17 @@ public class SubscriptionEvent extends Event {
     private boolean gift;
 
     public enum SubscriptionType {
-        UNKNOWN, PRIME, FIRST, SECOND, THIRD
+        UNKNOWN("UNKNOWN"), PRIME("PRIME"), FIRST("$4.99"), SECOND("$9.99"), THIRD("$24.99");
+
+        private String amount;
+
+        SubscriptionType(String amount) {
+            this.amount = amount;
+        }
+
+        public String getAmount() {
+            return amount;
+        }
     }
 
     public SubscriptionEvent(Map<String, String> tags, String[] arguments, String line, boolean gift) {

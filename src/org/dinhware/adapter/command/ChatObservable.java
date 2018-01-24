@@ -12,5 +12,7 @@ import org.dinhware.event.MessageEvent;
 public interface ChatObservable {
     void addCommand(String trigger, ChatCommand command);
 
+    void addReoccurResponse(Long amount, String string);
+
     void notifyCommand(String command, MessageEvent event);
 }
