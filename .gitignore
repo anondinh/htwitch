@@ -1,6 +1,8 @@
 HTwitch.iml
 .idea/*
 out/
-src/org/dinhware/testing/*
-src/org/dinhware/production/*
+src/main/java/org/dinhware/testing/*
+src/main/java/org/dinhware/production/*
 src/META-INF
+src/main/target
+src/main/target/*
