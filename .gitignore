@@ -4,5 +4,4 @@ out/
 src/main/java/org/dinhware/testing/*
 src/main/java/org/dinhware/production/*
 src/META-INF
-src/main/target
-src/main/target/*
+target/
