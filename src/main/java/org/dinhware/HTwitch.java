@@ -16,10 +16,11 @@ import java.net.Socket;
 
 abstract class HTwitch extends Thread {
 
-    private String nick, oAuth;
+    public static String nick;
+    private String oAuth;
 
     HTwitch(String nick, String oAuth) {
-        this.nick = nick;
+        HTwitch.nick = nick;
         this.oAuth = getOAuth(oAuth);
     }
 

@@ -24,7 +24,7 @@ import java.util.Map;
 @ListenerType(type = EventType.PRIVMSG)
 public abstract class MessageAdapter implements Listener, ChatObservable {
 
-    private final String COMMAND_PREFIX;
+    protected final String COMMAND_PREFIX;
     private long counter;
 
     public MessageAdapter(String COMMAND_PREFIX) {
