@@ -10,7 +10,7 @@ Feel free to join the HTwitch [Discord](https://discord.gg/CNk6aKp) if you have 
 
 ```java
 import org.dinhware.HTwitchBot;
-import org.dinhware.adapter.command.Command;
+import org.dinhware.commands.Command;
 import org.dinhware.adapter.core.MessageAdapter;
 import org.dinhware.event.BitEvent;
 import org.dinhware.event.MessageEvent;
