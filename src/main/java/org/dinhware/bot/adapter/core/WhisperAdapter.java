@@ -1,5 +1,7 @@
 package org.dinhware.bot.adapter.core;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.dinhware.bot.adapter.Listener;
 import org.dinhware.bot.adapter.ListenerType;
 import org.dinhware.bot.adapter.command.WhisperCommand;
@@ -20,6 +22,8 @@ import java.util.Map;
 @ListenerType(type = EventType.WHISPER)
 public abstract class WhisperAdapter implements Listener, WhisperObservable {
 
+    private static Logger LOGGER = LogManager.getLogger(WhisperAdapter.class);
+
     private final String COMMAND_PREFIX;
 
     public WhisperAdapter(String COMMAND_PREFIX) {
@@ -36,6 +40,7 @@ public abstract class WhisperAdapter implements Listener, WhisperObservable {
         if (args[0].startsWith(COMMAND_PREFIX) && listeners.containsKey(args[0].substring(1))) {
             notifyCommand(args[0].substring(1), event);
         } else {
+            LOGGER.info("{}: {}", event.getUser().getName(), event.getDisplayed());
             onWhisper(event);
         }
 

@@ -1,5 +1,7 @@
 package org.dinhware.bot.adapter.core;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.dinhware.bot.adapter.Listener;
 
 import java.util.HashMap;
@@ -18,15 +20,17 @@ import java.util.concurrent.TimeUnit;
 
 public class AdapterExecutor {
 
+    private static Logger LOGGER = LogManager.getLogger(AdapterExecutor.class);
     private static ExecutorService executorService;
 
     static {
         ThreadPoolExecutor executorService = new ThreadPoolExecutor(0, 50, 120L, TimeUnit.SECONDS, new SynchronousQueue<>());
         executorService.allowCoreThreadTimeOut(true);
         AdapterExecutor.executorService = executorService;
+        LOGGER.info(executorService.toString());
     }
 
-    public static void submit(Listener listener, String[] arguments, String line, boolean printError) {
+    public static void submit(Listener listener, String[] arguments, String line) {
         executorService.submit(() -> {
             Map<String, String> tags = new HashMap<>();
             if (line.startsWith("@")) {
@@ -38,9 +42,7 @@ public class AdapterExecutor {
             try {
                 listener.dispatch(tags, arguments, line);
             } catch (Throwable throwable) {
-                if (printError) {
-                    throwable.printStackTrace();
-                }
+                LOGGER.error(throwable.toString());
             }
         });
     }

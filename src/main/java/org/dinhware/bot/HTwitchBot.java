@@ -1,5 +1,7 @@
 package org.dinhware.bot;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.dinhware.bot.adapter.Listener;
 import org.dinhware.bot.adapter.ListenerObservable;
 import org.dinhware.bot.adapter.ListenerType;
@@ -23,19 +25,19 @@ import java.util.Map;
 
 public class HTwitchBot extends HTwitch implements ListenerObservable {
 
+    private static Logger LOGGER = LogManager.getLogger(HTwitchBot.class);
+
     private Map<EventType, Listener> listeners = new HashMap<>();
 
     private BufferedWriter writer;
     private BufferedReader reader;
-
-    private boolean verbose, printError;
 
     public HTwitchBot(String nick, String oAuth) {
         super(nick, oAuth);
         try {
             connect();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error(e.toString());
         }
     }
 
@@ -52,8 +54,8 @@ public class HTwitchBot extends HTwitch implements ListenerObservable {
     }
 
     @Override
-    public void notifyListener(EventType type, String[] arguments, String line, boolean printError) {
-        AdapterExecutor.submit(listeners.get(type), arguments, line, printError);
+    public void notifyListener(EventType type, String[] arguments, String line) {
+        AdapterExecutor.submit(listeners.get(type), arguments, line);
     }
 
     @Override
@@ -76,19 +78,10 @@ public class HTwitchBot extends HTwitch implements ListenerObservable {
         try {
             writer.write(o + "\r\n");
             writer.flush();
+            LOGGER.debug(o);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error(e.toString());
         }
-    }
-
-    @Override
-    public void setVerbose(boolean verbose) {
-        this.verbose = verbose;
-    }
-
-    @Override
-    public void setPrintError(boolean printError) {
-        this.printError = printError;
     }
 
     @Override
@@ -107,23 +100,20 @@ public class HTwitchBot extends HTwitch implements ListenerObservable {
             try {
                 handle(reader.readLine());
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.error(e.toString());
             }
         }
     }
 
     private void handle(String line) {
-        if (verbose) {
-            System.out.println(line);
-        }
-
+        LOGGER.debug(line);
         if (line.startsWith("PING")) {
             sendRAW("PONG " + line.substring(5));
         } else {
             String[] arguments = line.split(" ", 5);
             EventType type = EventType.get(arguments[line.startsWith("@") ? 2 : 1]);
             if (listeners.containsKey(type)) {
-                notifyListener(type, arguments, line, printError);
+                notifyListener(type, arguments, line);
             }
         }
     }

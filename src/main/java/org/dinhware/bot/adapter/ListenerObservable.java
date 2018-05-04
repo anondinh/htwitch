@@ -14,7 +14,7 @@ public interface ListenerObservable {
 
     void addListener(Listener... listeners);
 
-    void notifyListener(EventType type, String[] arguments, String line, boolean printError);
+    void notifyListener(EventType type, String[] arguments, String line);
 
 }
 

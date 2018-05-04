@@ -1,5 +1,7 @@
 package org.dinhware.bot.adapter.core;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.dinhware.bot.adapter.Listener;
 import org.dinhware.bot.adapter.ListenerType;
 import org.dinhware.bot.adapter.command.ChatObservable;
@@ -20,6 +22,8 @@ import java.util.Map;
 
 @ListenerType(type = EventType.PRIVMSG)
 public abstract class MessageAdapter implements Listener, ChatObservable {
+
+    private static Logger LOGGER = LogManager.getLogger(MessageAdapter.class);
 
     protected final String COMMAND_PREFIX;
 
@@ -43,6 +47,7 @@ public abstract class MessageAdapter implements Listener, ChatObservable {
                     notifyCommand(args[0].substring(1), event);
                 }
             } else {
+                LOGGER.info("{}: {}", event.getUser().getName(), event.getDisplayed());
                 onMessage(event);
             }
         }

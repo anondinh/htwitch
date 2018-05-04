@@ -36,23 +36,6 @@ public class Test {
          */
         bot.requestCapabilities(Capability.COMMANDS, Capability.MEMBERSHIP, Capability.TAGS);
 
-         /*
-         * Toggle verbose mode on
-         * Print anything read by the reader
-         * 
-         * @param boolean
-         */
-        bot.setVerbose(true);
-
-        /*
-         * Toggle error-verbose mode on
-         * Print any error thrown by the internal-api-code
-         * This includes any Listener or Command you add
-         * 
-         * @param boolean
-         */
-        bot.setPrintError(true);
-
         /*
          * Create a new MessageListener instance
          *
