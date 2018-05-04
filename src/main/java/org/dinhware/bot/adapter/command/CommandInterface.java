@@ -9,8 +9,10 @@ import org.dinhware.bot.event.MessageEvent;
  * Time: 14:29
  */
 
-public interface ChatObservable {
-    void addCommand(String trigger, CommandInterface command);
+public interface CommandInterface {
+    void dispatch(MessageEvent event);
 
-    void notifyCommand(String command, MessageEvent event);
+    long getLastUsage();
+
+    long getCooldown();
 }

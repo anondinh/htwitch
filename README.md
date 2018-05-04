@@ -79,14 +79,19 @@ public class Test {
          * Adding a Command to the MessageAdapter
          *
          * @param String trigger
-         * @param Command instance
+         * @param ChatCommand instance
          */
-        listener.addCommand("test", new Command() {
-            @Override
-            public void execute(MessageEvent event) {
-                event.respond("You just used a command!");
-            }
-        });
+        listener.addCommand("test", new ChatCommand() {
+                    @Override
+                    protected void execute(MessageEvent event) {
+                        event.respond("test was used!");
+                    }
+
+                    @Override
+                    public long getCooldown() {
+                        return 5000;
+                    }
+                });
 
         /*
          * Adding the Listener to our Bot
