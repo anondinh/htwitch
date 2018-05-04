@@ -9,13 +9,13 @@ Feel free to join the HTwitch [Discord](https://discord.gg/CNk6aKp) if you have 
 ## HTwitch made easy
 
 ```java
-import org.dinhware.HTwitchBot;
+import org.dinhware.bot.HTwitchBot;
 import org.dinhware.commands.Command;
-import org.dinhware.adapter.core.MessageAdapter;
-import org.dinhware.event.BitEvent;
-import org.dinhware.event.MessageEvent;
-import org.dinhware.objects.Capability;
-import org.dinhware.objects.Channel;
+import org.dinhware.bot.adapter.core.MessageAdapter;
+import org.dinhware.bot.event.BitEvent;
+import org.dinhware.bot.event.MessageEvent;
+import org.dinhware.bot.objects.Capability;
+import org.dinhware.bot.objects.Channel;
 
 public class Test {
 
